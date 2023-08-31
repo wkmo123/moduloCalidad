@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import modulo.calidad.api.DTO.CausasRequest;
 import modulo.calidad.api.DTO.ProcesoRequest;
+import modulo.calidad.api.Entidad.Causas;
 import modulo.calidad.api.Entidad.Proceso;
+import modulo.calidad.api.Servicio.CausasServicio;
 import modulo.calidad.api.Servicio.ProcesoServicio;
 
 @RestController
@@ -24,6 +27,8 @@ public class ProcesoController {
   // Despues creamos una variable privada llamda ModuloServicio
   @Autowired
   private ProcesoServicio servicio;
+  @Autowired
+  private CausasServicio causasServicio;
 
 
   // En esta parte va todo el crud del formulario
@@ -39,7 +44,14 @@ public class ProcesoController {
     return ResponseEntity.ok("Proceso insertado exitosamente con ID:" + proceso.getId());
   }
 
-    @PutMapping("/editar/{id}")
+  //Insertar Causas
+   @PostMapping("/insertar")//No se como cambiarlo
+  public ResponseEntity<String> insertarCausas(@RequestBody CausasRequest causasRequest) {
+    Causas causa = causasServicio.insertarNuevaCausa(causasRequest);
+    return ResponseEntity.ok("Causa insertada exitosamente con ID:" + causa.getId());
+  }
+
+  @PutMapping("/editar/{id}")
   public ResponseEntity<Proceso> actualizarProceso(@PathVariable Long id, @RequestBody ProcesoRequest procesoRequest) {
     Proceso procesoActualizado = servicio.editarNuevoProceso(id, procesoRequest);
     if (procesoActualizado != null) {
@@ -49,9 +61,28 @@ public class ProcesoController {
     }
   } 
 
+  //Actualizar Causas
+  @PutMapping("/editar/{id}")//No se como cambiarlo
+  public ResponseEntity<Causas> actualizarCausa(@PathVariable Long id, @RequestBody CausasRequest causasRequest) {
+    Causas causaActualizada = causasServicio.editarNuevaCausa(id, causasRequest);
+    if (causaActualizada != null) {
+      return ResponseEntity.ok(causaActualizada);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  } 
+
    @DeleteMapping("/borrar/{id}")
    public ResponseEntity<Void> borrarProceso(@PathVariable Long id) {
     servicio.borrarProceso(id);
+    return ResponseEntity.noContent().build();
+
+  }
+
+  //Borrar Causas
+  @DeleteMapping("/borrar/{id}")//Queda pendiente este cambio
+   public ResponseEntity<Void> borrarCausa(@PathVariable Long id) {
+    causasServicio.borrarCausa(id);
     return ResponseEntity.noContent().build();
 
   }

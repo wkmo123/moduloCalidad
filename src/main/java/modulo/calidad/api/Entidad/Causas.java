@@ -22,7 +22,7 @@ public class Causas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String causas;
+    private String nombreCausa;
 
     
     @ManyToOne
