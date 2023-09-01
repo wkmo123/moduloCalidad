@@ -43,6 +43,7 @@ public class ProcesoController {
                      // "templates"
   }
 
+
   @PostMapping("/insertar/proceso")
   public ResponseEntity<String> insertarProceso(@RequestBody ProcesoRequest procesoRequest) {
     Proceso proceso = servicio.insertarNuevoProceso(procesoRequest);
@@ -72,6 +73,46 @@ public class ProcesoController {
       return ResponseEntity.notFound().build();
     }
   } 
+  //-------------------------
+  //Get
+
+  @GetMapping("/procesos/{id}")
+  public ResponseEntity<String> obtenerProcesoPorId(@PathVariable Long id) {
+      // Aquí debes implementar la lógica para obtener un proceso por su ID
+      Proceso proceso = servicio.obtenerProcesoPorId(id);
+      
+      if (proceso != null) {
+          return ResponseEntity.ok("Proceso encontrado con ID:" + proceso.getId() + ", Nombre: " + proceso.getNombreProceso());
+      } else {
+          return ResponseEntity.notFound().build();
+      }
+  }
+
+  @GetMapping("/causas/{id}")
+  public ResponseEntity<String> obtenerCausaPorId(@PathVariable Long id) {
+      // Aquí debes implementar la lógica para obtener una causa por su ID
+      Causas causa = causasServicio.obtenerCausaPorId(id);
+      
+      if (causa != null) {
+          return ResponseEntity.ok("Causa encontrada con ID:" + causa.getId() + ", Descripción: " + causa.getNombreCausa());
+      } else {
+          return ResponseEntity.notFound().build();
+      }
+  }
+  
+//------------------------------------------------
+  
+  @GetMapping("/indicadores/{id}")
+  public ResponseEntity<String> obtenerIndicadorPorId(@PathVariable Long id) {
+      // Aquí debes implementar la lógica para obtener un indicador por su ID
+      Indicador indicador = indicadorServicio.obtenerIndicadorPorId(id);
+      
+      if (indicador != null) {
+          return ResponseEntity.ok("Indicador encontrado con ID:" + indicador.getId() + ", Nombre: " + indicador.getNombreIndicador());
+      } else {
+          return ResponseEntity.notFound().build();
+      }
+  }
 
   //Actualizar Indicadores  
   @PutMapping("/editar/indicador/{id}")//falta cambiarlo

@@ -32,6 +32,13 @@ public class ProcesoImpl implements ProcesoServicio {
 
         return repositorio.save(proceso);
     }
+//-----------------------------------
+    @Override
+    public Proceso obtenerProcesoPorId(Long id) {
+        return repositorio.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Proceso no encontrado"));
+    }
+//-------------------------------
 
     // Creamos una funcion llamada editarProceso la cual requiere el id 
     @Override
@@ -54,6 +61,8 @@ public class ProcesoImpl implements ProcesoServicio {
     public void borrarProceso(Long id) {
         repositorio.deleteById(id);
     }
+
+    
 
     /*
      * @Override

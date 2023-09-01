@@ -36,6 +36,14 @@ public class CausasImpl implements CausasServicio{
         return causasRepositorio.save(causas);
     }
 
+    //--------------------------------
+    @Override
+    public Causas obtenerCausaPorId(Long id) {
+        return causasRepositorio.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Causa no encontrada"));
+    }
+    //-------------------------------------
+
     // Creamos una funcion llamada editarProceso la cual requiere el id 
     @Override
     public Causas editarNuevaCausa(Long id, CausasRequest causasRequest) {
@@ -58,13 +66,5 @@ public class CausasImpl implements CausasServicio{
         causasRepositorio.deleteById(id);
     }
 
-    /*
-     * @Override
-     * public Proceso recuperaProceso(Long id) {
-     * // Aqui se recuperaria el proceso correspondiente de la base de datos
-     * repositorio.returnByID(id);
-     * return proceso;
-     * }
-     */
 
 }

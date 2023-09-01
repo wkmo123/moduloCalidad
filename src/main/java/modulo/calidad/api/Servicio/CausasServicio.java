@@ -6,6 +6,7 @@ import modulo.calidad.api.Entidad.Causas;
 public interface CausasServicio {
     
     public Causas insertarNuevaCausa(CausasRequest causasRequest);
+    public Causas obtenerCausaPorId(Long id);
     public Causas editarNuevaCausa(Long id,CausasRequest causasRequest);
     public void borrarCausa(Long id);
 

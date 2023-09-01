@@ -34,6 +34,15 @@ public class IndicadorImpl implements IndicadorServicio{
         return indicadorRepositorio.save(indicador);
     }
 
+    //---------------------------------------------------------
+    @Override
+    public Indicador obtenerIndicadorPorId(Long id) {
+        return indicadorRepositorio.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Indicador no encontrado"));
+    }
+    //----------------------------------------------------------
+
+
     @Override
     public Indicador editarNuevoIndicador(Long id, IndicadorRequest indicadorRequest) {
         Indicador indicadorExistente = indicadorRepositorio.findById(id)
@@ -53,5 +62,7 @@ public class IndicadorImpl implements IndicadorServicio{
     public void borrarIndicador(Long id) {
         indicadorRepositorio.deleteById(id); 
     }
+
+   
     
 }
