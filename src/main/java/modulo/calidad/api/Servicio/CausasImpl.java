@@ -4,15 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import modulo.calidad.api.DTO.CausasRequest;
-import modulo.calidad.api.DTO.ProcesoRequest;
 import modulo.calidad.api.Entidad.Causas;
 import modulo.calidad.api.Entidad.Indicador;
-import modulo.calidad.api.Entidad.Modulos;
-import modulo.calidad.api.Entidad.Proceso;
 import modulo.calidad.api.Repositorio.CausasRepositorio;
 import modulo.calidad.api.Repositorio.IndicadorRepositorio;
-import modulo.calidad.api.Repositorio.ModuloRepositorio;
-import modulo.calidad.api.Repositorio.ProcesoRepositorio;
 
 @Service
 public class CausasImpl implements CausasServicio{

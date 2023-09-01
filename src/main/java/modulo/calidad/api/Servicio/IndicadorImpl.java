@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import modulo.calidad.api.DTO.IndicadorRequest;
-import modulo.calidad.api.Entidad.Causas;
 import modulo.calidad.api.Entidad.Indicador;
-import modulo.calidad.api.Entidad.Modulos;
 import modulo.calidad.api.Entidad.Proceso;
 import modulo.calidad.api.Repositorio.IndicadorRepositorio;
 import modulo.calidad.api.Repositorio.ProcesoRepositorio;
