@@ -17,9 +17,6 @@ public class ProcesoImpl implements ProcesoServicio {
 
     @Autowired
     private ModuloRepositorio moduloRepositorio;
-
-
-
     // aqui creamos funcion insertarNuevo proceso la cual tiene dos requerimientos
     // llamados procesoRequest
     @Override

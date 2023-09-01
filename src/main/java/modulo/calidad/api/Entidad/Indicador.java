@@ -29,6 +29,7 @@ public class Indicador {
     @ManyToOne
     @JoinColumn(name = "proceso_id")
     private Proceso proceso;
+    private String nombreIndicador;
 
     private Boolean cumplimiento;
 

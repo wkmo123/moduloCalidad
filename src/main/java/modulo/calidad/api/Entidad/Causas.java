@@ -22,6 +22,7 @@ public class Causas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //Aca no deberia ser un List<String>????
     private String nombreCausa;
 
     

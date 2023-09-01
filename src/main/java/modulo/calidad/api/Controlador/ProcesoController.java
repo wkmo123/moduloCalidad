@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import modulo.calidad.api.DTO.CausasRequest;
+import modulo.calidad.api.DTO.IndicadorRequest;
 import modulo.calidad.api.DTO.ProcesoRequest;
 import modulo.calidad.api.Entidad.Causas;
+import modulo.calidad.api.Entidad.Indicador;
 import modulo.calidad.api.Entidad.Proceso;
 import modulo.calidad.api.Servicio.CausasServicio;
+import modulo.calidad.api.Servicio.IndicadorServicio;
 import modulo.calidad.api.Servicio.ProcesoServicio;
 
 @RestController
@@ -27,6 +30,8 @@ public class ProcesoController {
   // Despues creamos una variable privada llamda ModuloServicio
   @Autowired
   private ProcesoServicio servicio;
+  @Autowired
+  private IndicadorServicio indicadorServicio;
   @Autowired
   private CausasServicio causasServicio;
 
@@ -38,20 +43,27 @@ public class ProcesoController {
                      // "templates"
   }
 
-  @PostMapping("/insertar")
+  @PostMapping("/insertar/proceso")
   public ResponseEntity<String> insertarProceso(@RequestBody ProcesoRequest procesoRequest) {
     Proceso proceso = servicio.insertarNuevoProceso(procesoRequest);
     return ResponseEntity.ok("Proceso insertado exitosamente con ID:" + proceso.getId());
   }
 
+  //Insertar Idicadores
+   @PostMapping("/insertar/indicador")//Falta cambiarlo
+  public ResponseEntity<String> insertarIndicador(@RequestBody IndicadorRequest indicadorRequest) {
+    Indicador indicador = indicadorServicio.insertarNuevoIndicador(indicadorRequest);
+    return ResponseEntity.ok("Indicador insertado exitosamente con ID:" + indicador.getId());
+  }
+
   //Insertar Causas
-   @PostMapping("/insertar")//No se como cambiarlo
+   @PostMapping("/insertar/causas")//No se como cambiarlo
   public ResponseEntity<String> insertarCausas(@RequestBody CausasRequest causasRequest) {
     Causas causa = causasServicio.insertarNuevaCausa(causasRequest);
     return ResponseEntity.ok("Causa insertada exitosamente con ID:" + causa.getId());
   }
 
-  @PutMapping("/editar/{id}")
+  @PutMapping("/editar/proceso/{id}")
   public ResponseEntity<Proceso> actualizarProceso(@PathVariable Long id, @RequestBody ProcesoRequest procesoRequest) {
     Proceso procesoActualizado = servicio.editarNuevoProceso(id, procesoRequest);
     if (procesoActualizado != null) {
@@ -61,8 +73,19 @@ public class ProcesoController {
     }
   } 
 
+  //Actualizar Indicadores  
+  @PutMapping("/editar/indicador/{id}")//falta cambiarlo
+  public ResponseEntity<Indicador> actualizarIndicador(@PathVariable Long id, @RequestBody IndicadorRequest indicadorRequest) {
+    Indicador indicadorActualizado = indicadorServicio.editarNuevoIndicador(id, indicadorRequest);
+    if (indicadorActualizado != null) {
+      return ResponseEntity.ok(indicadorActualizado);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  } 
+
   //Actualizar Causas
-  @PutMapping("/editar/{id}")//No se como cambiarlo
+  @PutMapping("/editar/causa/{id}")//No se como cambiarlo
   public ResponseEntity<Causas> actualizarCausa(@PathVariable Long id, @RequestBody CausasRequest causasRequest) {
     Causas causaActualizada = causasServicio.editarNuevaCausa(id, causasRequest);
     if (causaActualizada != null) {
@@ -72,15 +95,22 @@ public class ProcesoController {
     }
   } 
 
-   @DeleteMapping("/borrar/{id}")
+   @DeleteMapping("/borrar/proceso/{id}")
    public ResponseEntity<Void> borrarProceso(@PathVariable Long id) {
     servicio.borrarProceso(id);
     return ResponseEntity.noContent().build();
 
   }
+  //Borrar Indicador
+   @DeleteMapping("/borrar/indicador/{id}")
+   public ResponseEntity<Void> borrarIndicador(@PathVariable Long id) {
+    indicadorServicio.borrarIndicador(id);
+    return ResponseEntity.noContent().build();
+
+  }
 
   //Borrar Causas
-  @DeleteMapping("/borrar/{id}")//Queda pendiente este cambio
+  @DeleteMapping("/borrar/causa/{id}")//Queda pendiente este cambio
    public ResponseEntity<Void> borrarCausa(@PathVariable Long id) {
     causasServicio.borrarCausa(id);
     return ResponseEntity.noContent().build();

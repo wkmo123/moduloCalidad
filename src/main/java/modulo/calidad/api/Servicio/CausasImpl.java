@@ -20,8 +20,8 @@ public class CausasImpl implements CausasServicio{
     @Autowired
     private CausasRepositorio causasRepositorio;
 
-    //@Autowired
-    //private IndicadorRepositorioRepositorio indicadorRepositorio;
+    @Autowired
+    private IndicadorRepositorio indicadorRepositorio;
 
 
     public Causas insertarNuevaCausa(CausasRequest causasRequest) {
