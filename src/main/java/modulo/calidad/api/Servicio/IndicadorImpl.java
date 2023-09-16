@@ -3,6 +3,7 @@ package modulo.calidad.api.Servicio;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.query.NativeQuery.ReturnProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +79,12 @@ public class IndicadorImpl implements IndicadorServicio {
             // Puedes lanzar una excepción o tomar otra acción según tu lógica de negocio.
             return null; // O lanzar una excepción, dependiendo de tu caso de uso.
         }
+    }
+
+    @Override
+    public List<Indicador> obtenerIndicadorporProcesoId(Long procesoId) {
+       
+        return repositorio.findByProcesoId(procesoId);
     }
 
 }

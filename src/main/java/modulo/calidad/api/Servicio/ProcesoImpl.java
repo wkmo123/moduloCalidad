@@ -66,6 +66,12 @@ public class ProcesoImpl implements ProcesoServicio {
         return repositorio.findAll();
     }
 
+    @Override
+    public List<Proceso> obtenerProcesosporModuloId(Long moduloId) {
+        
+        return  repositorio.findByModuloId(moduloId);
+    }
+
     /*
      * @Override
      * public Proceso recuperaProceso(Long id) {

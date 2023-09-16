@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class FormularioController {
@@ -83,8 +85,7 @@ public class FormularioController {
             model.addAttribute("procesos", ultimoProceso);
         }
 
-        
-return "plantilla2";
+        return "plantilla2";
     }
 
     @PostMapping("/guardar2")
@@ -135,19 +136,34 @@ return "plantilla2";
         return "resultados";
 
     }
-    //-------------------------------------------
-    //Formulario
+    // -------------------------------------------
+    // Formulario
+
+    @GetMapping("/procesosPorModulo")
+    @ResponseBody
+    public List<Proceso> obtenerProcesosPorModulo(@RequestParam Long moduloId) {
+        List<Proceso> procesos = procesoServicio.obtenerProcesosporModuloId(moduloId);
+        return procesos;
+    }
+
+    @GetMapping("/indicadorPorProceso")
+    @ResponseBody
+    public List<Indicador> obtenerIndicadorPorProceso(@RequestParam Long procesoId){
+        List<Indicador> indicadores = indicadorServicio.obtenerIndicadorporProcesoId(procesoId);
+
+        return indicadores;
+    }
+
     @RequestMapping("/formulario")
     public String mostrarFormulario(Model model) {
         List<Modulos> listaModulos = moduloServicio.obtenerModulo();
         List<Causas> listaCausas = causaServicio.obtenerCausas();
         List<Indicador> listaIndicadores = indicadorServicio.obtenerIndicador();
-        List<Proceso> listaProcesos = procesoServicio.obtenerProcesos();
-        model.addAttribute("procesos", listaProcesos);
+        // List<Proceso> listaProcesos = procesoServicio.obtenerProcesos();
+        // model.addAttribute("procesos", listaProcesos);
         model.addAttribute("modulos", listaModulos);
         model.addAttribute("causas", listaCausas);
         model.addAttribute("indicadores", listaIndicadores);
-    
 
         // model.addAttribute("proceso", proceso);
         return "formulario";

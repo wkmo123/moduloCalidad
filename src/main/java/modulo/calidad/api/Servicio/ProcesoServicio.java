@@ -15,6 +15,8 @@ public interface ProcesoServicio {
 
     public void borrarProceso(Long id);
 
-    List<Proceso> obtenerProcesos();
+     List<Proceso> obtenerProcesos();
+
+    List<Proceso> obtenerProcesosporModuloId(Long moduloId);
 
 }

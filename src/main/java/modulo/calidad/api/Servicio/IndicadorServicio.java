@@ -19,4 +19,6 @@ public interface IndicadorServicio {
     public Indicador guardar(Indicador indicador);
 
     public Indicador cargarPorId(Long id);
+
+    List<Indicador> obtenerIndicadorporProcesoId(Long procesoId);
 }
